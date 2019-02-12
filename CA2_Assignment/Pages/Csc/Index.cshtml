@@ -54,7 +54,14 @@
         <h2 class="mt-0">Talents</h2>
     </div>
     <div class="col-md-6 text-right">
-        <a class="btn btn-outline-info" asp-page="/CSC/Upload">Upload Talent</a>
+        @if (Model.IsPremium && Model.LoggedIn)
+        {
+            <a class="btn btn-outline-info" asp-page="/CSC/Upload">Upload Talent</a>
+        }
+        else if (Model.LoggedIn)
+        {
+            <a class="btn btn-outline-warning" asp-page="/CSC/Charge">Become Premium</a>
+        }
     </div>
 </div>
 <hr />

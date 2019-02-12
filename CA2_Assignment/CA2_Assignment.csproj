@@ -10,6 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Captcha\**" />
+    <Content Remove="Captcha\**" />
+    <EmbeddedResource Remove="Captcha\**" />
+    <None Remove="Captcha\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.31.15" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
@@ -25,9 +32,6 @@
   <ItemGroup>
     <Folder Include="..\..\..\CA2 - Assignment_Codes%2528UploadImage&amp;Stripe%2529\CA2 - Assignment_Codes\CA2_Assignment\Models\" />
     <Folder Include="Areas\Identity\Services\" />
-    <Folder Include="Captcha\" />
-    <Folder Include="wwwroot\images\Iot02\" />
-    <Folder Include="wwwroot\images\Iot01\" />
   </ItemGroup>
 
 </Project>

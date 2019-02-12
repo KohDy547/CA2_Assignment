@@ -1,42 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CA2_Ultima.Data;
+﻿using CA2_Assignment.Configurations;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Stripe;
+using Microsoft.Extensions.Options;
 
 namespace CA2_Assignment.Pages.CSC
 {
     public class ChargeModel : PageModel
     {
+        [TempData]
+        public string Message { get; set; }
+        public bool ShowMessage => !string.IsNullOrEmpty(Message);
+
+        public string StripeKey = "";
+        public string ChargeAmount = "";
+        public string ChargeAmountString = "";
+
+        private readonly Csc_StripeSettings _Csc_StripeSettings;
+        public ChargeModel(IOptions<Csc_StripeSettings> Csc_StripeSettings)
+        {
+            _Csc_StripeSettings = Csc_StripeSettings.Value;
+
+            StripeKey = _Csc_StripeSettings.PublishableKey;
+            ChargeAmount = _Csc_StripeSettings.PremiumSubscriptionCost;
+
+            double ChargeAmountDouble = double.Parse(ChargeAmount) / 100;
+            ChargeAmountString = "$" + ChargeAmountDouble;
+        }
 
         public void OnGet()
         {
-    
         }
-
-        public IActionResult Charge(string stripeEmail, string stripeToken)
+        public IActionResult OnPost()
         {
-            var customers = new CustomerService();
-            var charges = new ChargeService();
-
-            var customer = customers.Create(new CustomerCreateOptions
-            {
-                Email = stripeEmail,
-                SourceToken = stripeToken
-            });
-
-            var charge = charges.Create(new ChargeCreateOptions
-            {
-                Amount = 1000,
-                Description = "Sample Charge",
-                Currency = "usd",
-                CustomerId = customer.Id
-            });
-
-            return RedirectToPage("Index");
+            return RedirectToPage("_ConfirmPayment");
         }
     }
 }
