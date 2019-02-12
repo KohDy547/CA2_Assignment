@@ -13,7 +13,7 @@ namespace CA2_Ultima.Data
             : base(options)
         {
         }
-        public DbSet<PremiumMembers> PremiumMembers { get; set; }
+        public DbSet<PremiumUser> PremiumMembers { get; set; }
         public DbSet<Comment> Comments { get; set; }
     }
 }
