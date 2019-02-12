@@ -1,7 +1,9 @@
 ﻿@page "{targetId}"
 @model CA2_Assignment.Pages.Csc.Talents.TalentModel
+@using CA2_Assignment.Models.CscModels
 @{
     string talentImgLink = Model.S3ImgBaseUrl + Model.Talent.Id + ".jpg";
+    List<Comment> Comments = Model.GetComments();
 }
 
 <div id="pageLoader" class="container d-flex justify-content-center">
@@ -35,13 +37,14 @@
     <hr />
     @if (Model.IsOwner)
     {
-    <div id="confirmDelete" style="display:none;" class="alert alert-danger alert-dismissible" role="alert">
-        <form method="post">
-            <button type="submit" class="btn btn-sm btn-outline-danger" style="margin:0px 3px 0px 3px;">I said delete!</button>
-            <button type="button" onclick="btn_HangOn_OnClick();" class="btn btn-sm btn-outline-secondary" style="margin:0px 3px 0px 3px;">Hang on...</button>
-            <strong>Delete this talent?</strong> Are you sure??
-        </form>
-    </div>
+        <div id="confirmDelete" style="display:none;" class="alert alert-danger alert-dismissible" role="alert">
+            <form method="post">
+                <button type="submit" class="btn btn-sm btn-outline-danger" style="margin:0px 3px 0px 3px;">I said delete!</button>
+                <button type="button" onclick="btn_HangOn_OnClick();" class="btn btn-sm btn-outline-secondary" style="margin:0px 3px 0px 3px;">Hang on...</button>
+                <strong>Delete this talent?</strong> Are you sure??
+                <input type="text" style="display: none" value="Delete" name="postType" />
+            </form>
+        </div>
     }
 
     <div class="row">
@@ -54,15 +57,41 @@
     </div>
     <br />
     <hr />
-
+    <div>@Comments.Count comments</div>
+    <br />
     <div class="row">
+        <script>
+            function showCommentButton() {
+                document.getElementById("submitBtn").style.visibility = "visible";
+                document.getElementById("comment").value = "";
+                document.getElementById("comment").color = "black";
+            }
+        </script>
         <form style="min-width:100%;" method="post">
-            <h4>Comment:</h4>
-            <textarea id="comment" class="textArea form-control" rows="5" style="min-width:100%;"></textarea>
+            <textarea id="comment" class="textArea form-control" rows="2" style="min-width:100%;color:grey;" name="content" onclick="showCommentButton()">Add a comment...</textarea>
             <br />
-            <input type='submit' value='Submit' />
+            <button id="submitBtn" type="submit" style="visibility:hidden; cursor: pointer; background:white; color:black; border: 2px solid #555555; padding:5px; float:right;" onmouseover="this.style.background='#555555';this.style.color='white';" onmouseout="this.style.background = 'white'; this.style.color = 'black';">Submit</button>
+            <input type="text" style="visibility: hidden" value="Comment" name="postType" />
         </form>
     </div>
+    <hr />
+    @foreach (Comment comment in Comments)
+    {
+        <div style="border:none">
+            <span style="font-weight:bold; padding-left:10px; font-size:1rem;">
+                @comment.UploadedByName
+            </span>
+            <span style="font-size:0.8rem; color:grey;">
+                @comment.TimeStamp
+            </span>
+            <br />
+            <div style="padding:10px;">
+                @comment.Content
+            </div>
+        </div>
+        <br />
+    }
+
 </div>
 <script>
     $("#pageLoader").fadeOut(@Model.LoaderFade, function () {

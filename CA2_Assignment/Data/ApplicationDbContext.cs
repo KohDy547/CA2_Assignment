@@ -14,5 +14,6 @@ namespace CA2_Ultima.Data
         {
         }
         public DbSet<PremiumMembers> PremiumMembers { get; set; }
+        public DbSet<Comment> Comments { get; set; }
     }
 }
