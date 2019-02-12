@@ -2,6 +2,8 @@
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
+    var base64 = Model.GetCaptchaImage();
+    var imgSrc = String.Format("data:image/png;base64,{0}", base64);
 }
 
 <h2>@ViewData["Title"]</h2>
@@ -26,6 +28,11 @@
                 <label asp-for="Input.ConfirmPassword"></label>
                 <input asp-for="Input.ConfirmPassword" class="form-control" />
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <img src="@imgSrc" />
+                <input type="text" class="form-control" placeholder="Captcha Code" asp-for="Input.CaptchaCode" maxlength="4" />
+                <span asp-validation-for="Input.CaptchaCode" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>

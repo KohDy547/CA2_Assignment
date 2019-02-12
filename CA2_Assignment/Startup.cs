@@ -1,3 +1,4 @@
+using CA2_Assignment.Captcha;
 using CA2_Assignment.Configurations;
 using CA2_Assignment.Repositories.CscRepositories;
 using CA2_Assignment.Services;
@@ -12,6 +13,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Stripe;
+using System;
 
 namespace CA2_Ultima
 {
@@ -85,6 +87,7 @@ namespace CA2_Ultima
 
             services.AddSingleton<IAwsService, AwsService>();
             services.AddSingleton<IEmailSender, EmailService>();
+            services.AddSingleton<ICaptchaService, CaptchaService>();
 
             services.AddScoped<ITalentsRepository, TalentsRepository>();
             #endregion
@@ -100,8 +103,7 @@ namespace CA2_Ultima
             {
                 options.Filters.Add(new RequireHttpsAttribute());
             });
-            #endregion 
-
+            #endregion
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {

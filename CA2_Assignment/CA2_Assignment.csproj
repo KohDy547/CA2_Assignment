@@ -5,6 +5,10 @@
     <UserSecretsId>aspnet-CA2_Ultima-093F814B-4C3B-4A43-8786-00606915360E</UserSecretsId>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.3.6" />
     <PackageReference Include="AWSSDK.S3" Version="3.3.31.15" />
@@ -15,11 +19,13 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="2.2.0" />
     <PackageReference Include="SendGrid" Version="9.10.0" />
     <PackageReference Include="Stripe.net" Version="22.8.1" />
+    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="..\..\..\CA2 - Assignment_Codes%2528UploadImage&amp;Stripe%2529\CA2 - Assignment_Codes\CA2_Assignment\Models\" />
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Captcha\" />
     <Folder Include="wwwroot\images\Iot02\" />
     <Folder Include="wwwroot\images\Iot01\" />
   </ItemGroup>
