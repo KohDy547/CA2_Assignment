@@ -447,7 +447,7 @@ namespace CA2_Assignment.Repositories.CscRepositories
                 returnedResponse = _IAwsService.awsS3_DeleteFileAsync(
                     _AmazonS3Client,
                     _Csc_AwsS3Settings.Bucket,
-                    _Csc_AwsS3Settings.Talents_FileKey).Result;
+                    "Talent_Photos/" + inputId + ".jpg").Result;
                 if (returnedResponse.HasError) return await Task.FromResult<Response>(returnedResponse);
 
                 return await Task.FromResult<Response>(new Response

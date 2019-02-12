@@ -62,13 +62,17 @@ namespace CA2_Assignment.Pages.Csc.Talents
                         Message = "alert alert-danger|Search failed.";
                     }
                 }
+                else
+                {
+                    Random rnd = new Random();
+                    Talents = Talents.OrderBy(x => rnd.Next()).ToArray();
+                }
             }
             catch (Exception)
             {
                 Message = "alert alert-danger|Failed to load talents.";
             }
         }
-
         public IActionResult OnPost()
         {
             string inputQuery = Request.Form["txt_searchTalent"];

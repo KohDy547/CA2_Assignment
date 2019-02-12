@@ -9,8 +9,10 @@
     <table class="nav navbar-nav navbar-right">
         <tr>
             <td>
-                <div class="align-self-center" style="color:aliceblue; padding:0px 5px 0px 5px;">
-                        @UserManager.GetUserName(User)
+                <div class="align-self-center" style="padding:0px 5px 0px 5px;">
+                    <a asp-area="Identity" asp-page="/Account/Manage/Index" title="My profile" 
+                       style="text-decoration-style:none; color:aliceblue;"
+                       >@UserManager.GetUserName(User)</a>
                 </div>
             </td>
             <td>

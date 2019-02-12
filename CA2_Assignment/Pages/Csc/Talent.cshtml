@@ -33,13 +33,16 @@
         }
     </div>
     <hr />
+    @if (Model.IsOwner)
+    {
     <div id="confirmDelete" style="display:none;" class="alert alert-danger alert-dismissible" role="alert">
-        <button type="button" class="btn btn-sm btn-outline-dark" style="margin:0px 10px 0px 10px;">I said delete!</button>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        <strong>Delete this talent?</strong> Are you sure??
+        <form method="post">
+            <button type="submit" class="btn btn-sm btn-outline-danger" style="margin:0px 3px 0px 3px;">I said delete!</button>
+            <button type="button" onclick="btn_HangOn_OnClick();" class="btn btn-sm btn-outline-secondary" style="margin:0px 3px 0px 3px;">Hang on...</button>
+            <strong>Delete this talent?</strong> Are you sure??
+        </form>
     </div>
+    }
 
     <div class="row">
         <div class="media">
@@ -69,5 +72,10 @@
 
     function btn_Delete_OnClick() {
         $("#confirmDelete").fadeIn(@Model.ContentFade);
+    }
+    function btn_HangOn_OnClick() {
+        $("#confirmDelete").fadeOut(@Model.ContentFade);
+    }
+    function btn_Kill_OnClick() {
     }
 </script>

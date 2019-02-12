@@ -21,7 +21,7 @@ namespace CA2_Assignment.Pages.Csc.Talents
         public int ContentFade = 500;
         public string S3ImgBaseUrl;
         public Talent Talent = new Talent();
-        public string TalentId = "";
+        private static string TalentId = "";
         public bool IsOwner = false;
 
         private readonly IHttpContextAccessor _IHttpContextAccessor;
@@ -57,8 +57,7 @@ namespace CA2_Assignment.Pages.Csc.Talents
                 Message = "alert alert-danger|Failed to load talent.";
             }
         }
-
-        public IActionResult OnDelete()
+        public IActionResult OnPost()
         {
             try
             {
@@ -68,7 +67,6 @@ namespace CA2_Assignment.Pages.Csc.Talents
                     Message = "alert alert-danger|Failed to delete talent.";
                     return RedirectToPage("Upload/" + TalentId);
                 }
-
 
                 Message = "alert alert-success|Talent successfully deleted.";
                 return RedirectToPage("Index");
