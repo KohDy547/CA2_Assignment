@@ -17,7 +17,7 @@ namespace CA2_Assignment.Captcha
 
         bool ValidateCaptchaCode(string userInputCaptcha, HttpContext context);
 
-        CaptchaResult GenerateCaptchaImage(int width, int height, string captchaCode);
+        CaptchaResponse GenerateCaptchaImage(int width, int height, string captchaCode);
     }
 
     public class CaptchaService : ICaptchaService
@@ -47,7 +47,7 @@ namespace CA2_Assignment.Captcha
             return isValid;
         }
 
-        public CaptchaResult GenerateCaptchaImage(int width, int height, string captchaCode)
+        public CaptchaResponse GenerateCaptchaImage(int width, int height, string captchaCode)
         {
             using (Bitmap baseMap = new Bitmap(width, height))
             using (Graphics graph = Graphics.FromImage(baseMap))
@@ -64,7 +64,7 @@ namespace CA2_Assignment.Captcha
 
                 baseMap.Save(ms, ImageFormat.Png);
 
-                return new CaptchaResult { CaptchaCode = captchaCode, CaptchaByteData = ms.ToArray(), Timestamp = DateTime.Now };
+                return new CaptchaResponse { CaptchaCode = captchaCode, CaptchaByteData = ms.ToArray(), Timestamp = DateTime.Now };
 
                 int GetFontSize(int imageWidth, int captchCodeCount)
                 {

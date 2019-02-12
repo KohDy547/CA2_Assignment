@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CA2_Assignment.Models.CscModels
 {
-    public class PremiumMembers
+    public class PremiumUser
     {
         public string Id { get; set; }
 

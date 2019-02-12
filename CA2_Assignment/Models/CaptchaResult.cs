@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CA2_Assignment.Models
 {
-    public class CaptchaResult
+    public class CaptchaResponse
     {
         public string CaptchaCode { get; set; }
         public byte[] CaptchaByteData { get; set; }
