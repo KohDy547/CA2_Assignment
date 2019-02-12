@@ -1,0 +1,69 @@
+﻿@page
+@model CA2_Assignment.Pages.Csc.Talents.UploadModel
+
+<style>
+    .textArea {
+        resize: none;
+        width: 100%;
+    }
+</style>
+
+<h3>Upload Talent</h3><hr />
+
+<div id="pageLoader" class="container d-flex justify-content-center">
+    <img src="~/images/Loader.gif" />
+</div>
+
+<div id="pageContent" class="container" style="display:none;">
+    @if (Model.ShowMessage)
+    {
+        <div class="alert @Model.Message.Split('|')[0] alert-dismissible fade show" role="alert">
+            @Model.Message.Split('|')[1]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        Model.Message = "";
+    }
+
+    <form id="uploadTalent" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label asp-for="Talent.Name" id="txt_talentNameLbl" for="txt_talentName"></label>
+            <input asp-for="Talent.Name" id="txt_talentName" type="text" class="form-control" placeholder="Talent Name"/>
+            <br />
+
+            <label id="file_talentImgLbl" for="file_talentImgDesc" value="0">Image</label>
+            <div class="input-group">
+                <input asp-for="Talent.Photo" type="file" id="file_talentImg" accept="image/*" aria-describedby="file_talentImgDesc" 
+                    class="custom-file-input" oninput="file_talentImg_onInput(event)"/>
+                <label asp-for="Talent.Photo" id="file_talentImgDesc" class="custom-file-label" for="file_talentImg">Talent Photo</label>
+            </div>
+            <br />
+
+            <label asp-for="Talent.Bio" id="txtA_talentBiographyLbl" for="txtA_talentBiography"></label>
+            <br />
+            <textarea asp-for="Talent.Bio" id="txtA_talentBiography" class="textArea form-control" placeholder="Talent Biography" rows="10"></textarea>
+        </div>
+
+        <a href="/CSC/Talents/Index" class="btn btn-danger btn-default">Cancel</a>
+        <button id="btn_submit" class="noClick btn btn-primary">Upload</button>
+    </form>
+</div>
+<script>
+    $("#pageLoader").fadeOut(@Model.LoaderFade, function () {
+        $(this).remove();
+        $("#pageContent").fadeIn(@Model.ContentFade);
+    });
+
+    function file_talentImg_onInput(event) {
+        var filePath = $("#file_talentImg").val();
+        if (filePath) {
+            var startIndex = (filePath.indexOf('\\') >= 0 ? filePath.lastIndexOf('\\') : filePath.lastIndexOf('/'));
+            var fileName = filePath.substring(startIndex);
+            if (fileName.indexOf('\\') === 0 || fileName.indexOf('/') === 0) {
+                fileName = fileName.substring(1);
+            }
+            $("#file_talentImgDesc").html(fileName);
+        }
+    }
+</script>

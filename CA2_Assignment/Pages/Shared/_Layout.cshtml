@@ -1,0 +1,75 @@
+﻿@{
+    string applicationName = "CA2 Ultima";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="~/lib/bootstrap_v4.1.3//vendor/bootstrap/css/bootstrap.css" />
+    <link rel="stylesheet" href="~/fonts/Roboto/Roboto.css" />
+    <script type="text/javascript" src="~/js/JQuery_v3.3.1.js"></script>
+    <script type="text/javascript" src="~/lib/bootstrap_v4.1.3/vendor/bootstrap/js/bootstrap.js"></script>
+
+    <style>
+        .navBarIcon {
+            height: 35px;
+            padding: 3px;
+        }
+        .iconSize {
+            display: block;
+            height: 60px;
+        }
+        .nav-link {
+            color: gray;
+            padding: 3px 0px 3px 0px;
+        }
+        .nav-item-header {
+            font-size: 20px;
+        }
+        .asp-btn {
+            color: dodgerblue;
+            background-color: ghostwhite;
+            margin: 0px 5px 0px 5px;
+        }
+            .asp-btn:hover {
+                background-color: lightgrey;
+            }
+        .loader {
+            background-image: url("../../wwwroot/images/Loader.gif")
+        }
+    </style>
+</head>
+<body style="padding: 0px; min-width: 250px;">
+    <header class="navbar navbar-dark bg-dark sticky-top flex-md-nowrap">
+        <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="/Index">@applicationName</a>
+        <ul class="navbar-nav px-3">
+            <li class="nav-item text-nowrap">
+            </li>
+        </ul>
+        <partial name="_LoginPartial" />
+    </header>
+    <div class="container-fluid">
+        <div class="row flex-xl-nowrap">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar sidebar-sticky collapse d-block">
+                <br />
+                <ul class="nav flex-column">
+                    <li class="nav-item-header"><a class="nav-link" asp-page="/Csc/Index"><strong>Csc</strong></a></li>
+                    <li class="nav-item"><a class="nav-link" asp-page="/CSC/Upload">Upload</a></li>
+                </ul>
+                <hr />
+                <ul class="nav flex-column">
+                    <li class="nav-item-header"><a class="nav-link" asp-page="/Iot01/Index"><strong>Iot01</strong></a></li>
+                </ul>
+                <hr />
+                <ul class="nav flex-column">
+                    <li class="nav-item-header"><a class="nav-link" asp-page="/Iot02/Index"><strong>Iot02</strong></a></li>
+                </ul>
+                <br />
+            </nav>
+            <main role="main" class="col-md-8 ml-sm-auto col-lg-10 pt-3 px-4">
+                @RenderBody()
+            </main>
+            @RenderSection("Scripts", required: false)
+        </div>
+    </div>
+</body>
+</html>

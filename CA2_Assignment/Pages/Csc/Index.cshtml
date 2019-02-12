@@ -1,0 +1,108 @@
+﻿@page
+@model CA2_Assignment.Pages.Csc.Talents.IndexModel
+@using CA2_Assignment.Models.CscModels;
+<style>
+    .container {
+        width: 98%;
+    }
+
+    .text-muted a {
+        color: #989898;
+    }
+
+        .text-muted a:hover {
+            color: grey;
+        }
+
+    .general {
+        background-color: #0095af;
+    }
+
+        .general .card-title {
+            color: #f3f3f3;
+        }
+
+        .general .card-text {
+            color: #f3f3f3;
+        }
+
+    .card-img {
+        display: block;
+        width: 100%;
+        height: auto;
+    }
+</style>
+<h3>Talents</h3>
+<hr />
+<form id="searchTalent" class="container" method="post">
+    <div class="row">
+        <div class="input-group">
+            @if (Model.Searching)
+            {
+                <input id="txt_searchTalent" name="txt_searchTalent" type="text" class="form-control" placeholder="Search..." value="@Model.SearchedQuery">
+            }
+            else
+            {
+                <input id="txt_searchTalent" name="txt_searchTalent" type="text" class="form-control" placeholder="Search...">
+            }
+            <div class="input-group-append">
+                <a class="btn btn-outline-secondary" asp-page="/Csc/Index">Clear</a>
+                <button class="btn btn-outline-secondary" type="submit">Search</button>
+            </div>
+        </div>
+    </div>
+</form>
+<br />
+
+<div id="pageLoader" class="container d-flex justify-content-center">
+    <img src="~/images/Loader.gif" />
+</div>
+
+<div id="pageContent" class="container" style="display:none;">
+    @if (Model.ShowMessage)
+    {
+        <div class="alert @Model.Message.Split('|')[0] alert-dismissible fade show" role="alert">
+            @Model.Message.Split('|')[1]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        Model.Message = "";
+    }
+    <div class="row" id="allTalents">
+        <div class="card-columns">
+            @foreach (Talent talent in Model.Talents)
+            {
+                string talentImgLink = Model.S3ImgBaseUrl + talent.Id + ".jpg";
+                string talentShortBio = (talent.Bio.ToCharArray().Length > 300) ?
+                    talent.Bio.Substring(0, 300) + "..." : talent.Bio;
+
+                <div class="card card-pin" style="display:none;" id="@talent.Id">
+                    <a href="/CSC/Talent/@talent.Id" title="@talent.Name">
+                        <img class="card-img-top" src="@talentImgLink">
+                    </a>
+                    <div class="card-body">
+                        <h5 class="card-title">@talent.Name</h5>
+                        <p class="card-text">@talentShortBio</p>
+                    </div>
+                    <div class="card-footer text-muted">
+                        Uploaded by @talent.UploadedByName
+                    </div>
+                </div>
+            }
+        </div>
+        @foreach (Talent talent in Model.Talents)
+        {
+            <script>
+            $("#@talent.Id").fadeIn(@Model.ContentFade);
+            </script>
+            Model.ContentFade += 10;
+        }
+        <script>
+            $("#pageLoader").fadeOut(@Model.LoaderFade, function () {
+                $(this).remove();
+                $("#pageContent").fadeIn(@Model.ContentFade);
+            });
+        </script>
+    </div>
+</div>

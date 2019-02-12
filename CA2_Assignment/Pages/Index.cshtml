@@ -1,0 +1,46 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="card-deck">
+    <div class="card">
+        <div class="card-header">CSC Project</div>
+        <img class="card-img-top" src="~/images/Csc/ModuleImg.jpg" alt="Card image cap" />
+        <div class="card-body">
+            <p class="card-text">
+                Cloud Service Computing
+            </p>
+        </div>
+        <div class="card-footer">
+            <a asp-page="/Csc/Index" class="btn btn-outline-secondary" style="width:100%;">Go to Module</a>
+        </div>
+    </div>    
+    <div class="card">
+        <div class="card-header">IOT Project 01</div>
+        <img class="card-img-top" src="..." alt="Card image cap" />
+        <div class="card-body">
+            <p class="card-text">
+                Team: Kopi-O<br />
+                Team Members: Nicholas Poh, Koh Ding Yuan
+            </p>
+        </div>
+        <div class="card-footer">
+            <a asp-page="/Iot01/Index" class="btn btn-outline-secondary" style="width:100%;">Go to Module</a>
+        </div>
+    </div>
+    <div class="card">
+        <div class="card-header">IOT Project 02</div>
+        <img class="card-img-top" src="..." alt="Card image cap" />
+        <div class="card-body">
+            <p class="card-text">
+                Team: Teh-O<br />
+                Team Members: Bruce Wang, Ng Yu Xiang
+            </p>
+        </div>
+        <div class="card-footer">
+            <a asp-page="/Iot02/Index" class="btn btn-outline-secondary" style="width:100%;">Go to Module</a>
+        </div>
+    </div>
+</div>

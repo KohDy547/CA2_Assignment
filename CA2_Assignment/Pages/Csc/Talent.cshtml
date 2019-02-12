@@ -1,0 +1,73 @@
+﻿@page "{targetId}"
+@model CA2_Assignment.Pages.Csc.Talents.TalentModel
+@{
+    string talentImgLink = Model.S3ImgBaseUrl + Model.Talent.Id + ".jpg";
+}
+
+<div id="pageLoader" class="container d-flex justify-content-center">
+    <img src="~/images/Loader.gif" />
+</div>
+
+<div id="pageContent" class="container" style="display:none;">
+    @if (Model.ShowMessage)
+    {
+        <div class="alert @Model.Message.Split('|')[0] alert-dismissible fade show" role="alert">
+            @Model.Message.Split('|')[1]
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        Model.Message = "";
+    }
+
+    <div class="container-fluid row">
+        <div class="col-md-6">
+            <h2 class="mt-0">@Model.Talent.Name</h2>
+        </div>
+        @if (Model.IsOwner)
+        {
+            <div class="col-md-6 text-right">
+                <button type="button" class="btn btn-outline-primary">Edit</button>
+                <button id="btn_Delete" type="button" class="btn pull-right btn-outline-danger" onclick="btn_Delete_OnClick();">Delete</button>
+            </div>
+        }
+    </div>
+    <hr />
+    <div id="confirmDelete" style="display:none;" class="alert alert-danger alert-dismissible" role="alert">
+        <button type="button" class="btn btn-sm btn-outline-dark" style="margin:0px 10px 0px 10px;">I said delete!</button>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <strong>Delete this talent?</strong> Are you sure??
+    </div>
+
+    <div class="row">
+        <div class="media">
+            <img class="mr-3" style="width:250px; border-radius:5px;" src="@talentImgLink" alt="Generic placeholder image">
+            <div class="media-body">
+                <p>@Model.Talent.Bio</p>
+            </div>
+        </div>
+    </div>
+    <br />
+    <hr />
+
+    <div class="row">
+        <form style="min-width:100%;" method="post">
+            <h4>Comment:</h4>
+            <textarea id="comment" class="textArea form-control" rows="5" style="min-width:100%;"></textarea>
+            <br />
+            <input type='submit' value='Submit' />
+        </form>
+    </div>
+</div>
+<script>
+    $("#pageLoader").fadeOut(@Model.LoaderFade, function () {
+        $(this).remove();
+        $("#pageContent").fadeIn(@Model.ContentFade);
+    });
+
+    function btn_Delete_OnClick() {
+        $("#confirmDelete").fadeIn(@Model.ContentFade);
+    }
+</script>

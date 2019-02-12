@@ -1,0 +1,37 @@
+﻿@page
+@using Microsoft.Extensions.Options
+@using CA2_Assignment.Configurations
+@using CA2_Assignment.Models.CscModels
+@inject ApplicationDbContext Context
+@inject IOptions<Csc_StripeSettings> Stripe
+
+@model CA2_Assignment.Pages.CSC.ChargeModel
+@{
+    ViewData["Title"] = "Charge";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+    List<PremiumMembers> PremiumMembers = (List<PremiumMembers>)Context.PremiumMembers.ToList();
+}
+
+<h2>Charge</h2>
+
+@foreach (PremiumMembers pm in PremiumMembers)
+{
+    <div>
+        @pm.Id
+    </div>
+}
+<form action="/CSC" method="POST">
+    <article>
+        <label>Amount: $10.00</label>
+    </article>
+    <script src="//checkout.stripe.com/v2/checkout.js"
+            class="stripe-button"
+            data-key="@Stripe.Value.PublishableKey"
+            data-locale="auto"
+            data-description="Sample Charge"
+            data-amount="1000">
+
+    </script>
+
+
+</form>
