@@ -119,7 +119,7 @@ namespace CA2_Assignment.Areas.Identity.Pages.Account
         public String GetCaptchaImage()
         {
             int width = 100;
-            int height = 36;
+            int height = 30;
             var captchaCode = _captcha.GenerateCaptchaCode();
             var result = _captcha.GenerateCaptchaImage(width, height, captchaCode);
             HttpContext.Session.SetString("CaptchaCode", result.CaptchaCode);
