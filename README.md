@@ -104,7 +104,3 @@ dotnet publish  -c Release
 * **Nicholas Poh Yi Jie**
 * **Ng Yu Xiang**
 * **Bruce Wang**
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
