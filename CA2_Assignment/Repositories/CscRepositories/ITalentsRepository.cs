@@ -40,7 +40,7 @@ namespace CA2_Assignment.Repositories.CscRepositories
         private readonly App_SharedSettings _App_SharedSettings;
         private readonly Csc_AwsS3Settings _Csc_AwsS3Settings;
         private readonly IAwsService _IAwsService;
-        private AmazonS3Client _AmazonS3Client;
+        private readonly AmazonS3Client _AmazonS3Client;
 
         public TalentsRepository(
             IHostingEnvironment IHostingEnvironment,

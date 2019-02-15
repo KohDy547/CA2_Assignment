@@ -46,7 +46,7 @@ namespace CA2_Assignment.Pages.Csc
                 Message = "alert alert-success|Now uploading talents is available to you.";
                 return RedirectToPage("Index");
             }
-            catch(Exception e)
+            catch
             {
                 Message = "alert alert-danger|Failed to update your subscription.";
                 return RedirectToPage("Index");
